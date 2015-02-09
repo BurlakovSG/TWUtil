@@ -28,10 +28,14 @@ public class MainActivity extends ActionBarActivity {
     private Button id_button_sendcommand;
     private TextView id_textView_Result;
 
-    private TWUtil mTW;
+    private Button button_send_command;
+    private EditText edit_command;
+    private EditText edit_arg1;
+    private TWUtil mTW, mTW2;
 
     public MainActivity() {
         this.mTW = null;
+        this.mTW2 = null;
     }
 
     static { //  !!!! what is this????
@@ -60,8 +64,9 @@ public class MainActivity extends ActionBarActivity {
         this.id_button_sendcommand = (Button) findViewById(R.id.id_button_sendcommand);
         this.id_textView_Result = (TextView) findViewById(R.id.id_textView_Result);
 
-
-
+        this.button_send_command = (Button) findViewById(R.id.button_send_command);
+        this.edit_command = (EditText) findViewById((R.id.editcommand));
+        this.edit_arg1 = (EditText) findViewById((R.id.edit_arg1));
 
 
         this.id_button_sendcommand.setOnClickListener(new Button.OnClickListener() {
@@ -100,7 +105,33 @@ public class MainActivity extends ActionBarActivity {
                 mTW = null;
             }
         });
+
+        this.button_send_command.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) // клик на кнопку
+            {
+                String cmd = edit_command.getText().toString();
+                int arg1 = Integer.parseInt(edit_arg1.getText().toString());
+                mTW2 = new TWUtil(16);
+                if (mTW2 != null) {
+                    try {
+                        if (mTW2.open( new short[]{(short) 260, (short) 262, (short) 263, (short) 266, (short) 274, (short) 513, (short) 514, (short) 515, (short) 769, (short) 770, (short) 1281, (short) -25088, (short) -25071, (short) -24816, (short) -24805, (short) -24804} ) == 0) {
+                            mTW2.start();
+                            mTW2.write(40730, arg1, 0, cmd);
+                            mTW2.stop();
+                            mTW2.close();
+                        }
+
+                    } catch (NumberFormatException e) {
+                        // введено не число
+
+                    }
+                }
+            }
+        });
     }
+
+
+
 
     protected void onDestroy() {
 

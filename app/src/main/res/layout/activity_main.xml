@@ -73,4 +73,35 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="28dp" />
 
+    <EditText
+        android:layout_width="700dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editcommand"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="busybox mount -o remount,rw /system" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_send_command"
+        android:id="@+id/button_send_command"
+        android:layout_below="@+id/editcommand"
+        android:layout_toRightOf="@+id/id_edit_arg1"
+        android:layout_toEndOf="@+id/id_edit_arg1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/edit_arg1"
+        android:layout_below="@+id/editcommand"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/id_edit_arg1"
+        android:layout_toStartOf="@+id/id_edit_arg1"
+        android:text="3" />
+
 </RelativeLayout>

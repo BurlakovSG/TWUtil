@@ -7,5 +7,6 @@
     <string name="id_text_command">Command</string>
     <string name="id_button_sendcommand">Write</string>
     <string name="id_textView_Result_title">Result</string>
+    <string name="button_send_command">Send Command</string>
 
 </resources>
