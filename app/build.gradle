@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-	compileSdkVersion 21
+	compileSdkVersion 16
 	buildToolsVersion "21.1.2"
 	defaultConfig {
 		applicationId "ru.d51x.twutil"
 		minSdkVersion 16
-		targetSdkVersion 21
+		targetSdkVersion 16
 		versionCode 1
 		versionName "1.0"
 	}
@@ -22,5 +22,4 @@ android {
 
 dependencies {
 	compile fileTree(include: ['*.jar'], dir: 'libs')
-	compile 'com.android.support:appcompat-v7:21.0.3'
 }

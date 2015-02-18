@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    style="@android:style/Theme.Holo">
+  >
 
 	<LinearLayout
 		android:orientation="vertical"
@@ -10,7 +10,6 @@
 		android:layout_height="wrap_content"
 		android:baselineAligned="false"
 		android:showDividers="middle|beginning|end"
-		android:background="@android:color/background_dark"
 		android:gravity="top|left"
 		android:layout_alignParentTop="true"
 		android:weightSum="1"
@@ -35,7 +34,6 @@
 			    android:id="@+id/id_edit_what"
 			    android:layout_below="@+id/id_text_command"
 			    android:layout_alignParentLeft="true"
-			    android:layout_alignParentStart="true"
 			    android:text="65521"
 				/>
 
@@ -58,7 +56,6 @@
 		        android:id="@+id/id_edit_arg2"
 		        android:layout_alignTop="@+id/id_edit_arg1"
 		        android:layout_toRightOf="@+id/id_edit_arg1"
-		        android:layout_toEndOf="@+id/id_edit_arg1"
 		        android:text="0" />
 
 			<Button
@@ -68,7 +65,6 @@
 			    android:id="@+id/id_button_sendcommand"
 			    android:layout_alignTop="@+id/id_edit_arg2"
 			    android:layout_toRightOf="@+id/id_edit_arg2"
-			    android:layout_toEndOf="@+id/id_edit_arg2"
 			    android:layout_gravity="right"/>
 		</LinearLayout>
 
@@ -80,7 +76,6 @@
 	        android:id="@+id/id_textView_Result_title"
 	        android:layout_below="@+id/id_button_sendcommand"
 	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentStart="true"
 			/>
 
 		<TextView
@@ -89,7 +84,6 @@
 	        android:id="@+id/id_textView_Result"
 	        android:layout_below="@+id/id_textView_Result_title"
 	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentStart="true"
 	        android:layout_marginTop="10dp"
 	        android:layout_marginBottom="20dp"
 	        android:layout_marginLeft="20dp"/>
@@ -102,10 +96,7 @@
 		android:layout_height="fill_parent"
 		android:layout_alignParentTop="true"
 		android:layout_alignParentRight="true"
-		android:layout_alignParentEnd="true"
 		android:layout_toRightOf="@+id/linearLayout"
-		android:layout_toEndOf="@+id/linearLayout"
-		android:background="@android:color/background_dark"
 		android:paddingLeft="20dp"
 		android:paddingRight="20dp"
 		android:paddingBottom="10dp">

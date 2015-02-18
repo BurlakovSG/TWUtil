@@ -1,15 +1,12 @@
 package ru.d51x.twutil;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.TextView;
@@ -17,10 +14,11 @@ import android.widget.EditText;
 import android.widget.Button;
 
 import android.tw.john.TWUtil;
+import android.widget.Toast;
 
+public class MainActivity extends Activity {
 
-public class MainActivity extends ActionBarActivity {
-
+	private int xwhat = -1;
     private static Handler mHandler;
 
     private EditText id_edit_what;
@@ -42,10 +40,6 @@ public class MainActivity extends ActionBarActivity {
 	    this.isHandlerStarted = false;
     }
 
-	static {
-
-
-	}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,10 +83,11 @@ public class MainActivity extends ActionBarActivity {
 	    this.id_button_handler.setOnClickListener(new Button.OnClickListener () {
 		    public void onClick (View v) // клик на кнопку
 		    {
-			    final int xwhat = Integer.parseInt (id_edittext_handler.getText ().toString ());
+
 			    if (isHandlerStarted) {
 				    // stop handler
 				    // stop and close TWUtil
+				    mTW2.write (xwhat, 255);
 				    mTW2.removeHandler ("TWUtilHandler");
 				    mTW2.stop ();
 				    mTW2.close ();
@@ -101,6 +96,7 @@ public class MainActivity extends ActionBarActivity {
 				    id_button_handler.setText ("Start Handler");
 			    } else {
 				    // open and start TWUtil
+				    xwhat = Integer.parseInt (id_edittext_handler.getText ().toString ());
 				    mTW2 = new TWUtil ();
 				    if (mTW2.open (new short[]{(short) xwhat}) == 0) {
 					    mTW2.start ();
@@ -111,13 +107,13 @@ public class MainActivity extends ActionBarActivity {
 										    Date date = new Date();
 										    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MMdd. hh:mm:ss");
 											String str = String.format("%s:  Message: what: %i   arg1: %i  arg2: %i\n", ft.format(date), msg.what, msg.arg1, msg.arg2);
-										    id_textview_log.append ( str );
+										    id_textview_log.setText ( id_textview_log.getText ()  + str );
+									        Toast.makeText (MainActivity.this, String.format("what: %i, arg1: %i, arg2: i", msg.what, msg.arg1, msg.arg2), Toast.LENGTH_LONG).show ();
 								    }
 							    } catch (Exception e) {
 							    }
 						    }
 						});
-					    mTW2.write (xwhat, 255);
 						isHandlerStarted = true;
 					    id_button_handler.setText ("Stop Handler");
 				    }
@@ -136,25 +132,4 @@ public class MainActivity extends ActionBarActivity {
         super.onDestroy();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
