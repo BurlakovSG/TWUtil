@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
 		            mTW.start ();
 
 		            int res = mTW.write (what, arg1, arg2);
-		            id_textView_Result.setText (String.valueOf (res));
+		            id_textView_Result.setText (String.format ("%d", res));
 		            // close session
 		            mTW.write (what, 255, 0); /// !!! зачем это???
 	            }
@@ -105,10 +105,11 @@ public class MainActivity extends Activity {
 							    try {
 								    if (msg.what == xwhat ) {
 										    Date date = new Date();
-										    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MMdd. hh:mm:ss");
-											String str = String.format("%s:  Message: what: %i   arg1: %i  arg2: %i\n", ft.format(date), msg.what, msg.arg1, msg.arg2);
-										    id_textview_log.setText ( id_textview_log.getText ()  + str );
-									        Toast.makeText (MainActivity.this, String.format("what: %i, arg1: %i, arg2: i", msg.what, msg.arg1, msg.arg2), Toast.LENGTH_LONG).show ();
+										    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
+									        String sd = ft.format(date);
+											String str = String.format("%s:  Message: what: %d   arg1: %d  arg2: %d", sd, msg.what, msg.arg1, msg.arg2);
+										    id_textview_log.setText ( str + "\n" + id_textview_log.getText ());
+									        Toast.makeText (MainActivity.this, String.format("what: %d, arg1: %d, arg2: %d", msg.what, msg.arg1, msg.arg2), Toast.LENGTH_LONG).show ();
 								    }
 							    } catch (Exception e) {
 							    }
