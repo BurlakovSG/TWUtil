@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 import android.tw.john.TWUtil;
 import android.widget.Toast;
@@ -33,6 +34,10 @@ public class MainActivity extends Activity {
 
     private TWUtil mTW, mTW2;
 	public boolean isHandlerStarted;
+    private CheckBox checkbox_show_toast;
+    private CheckBox checkbox_get_obj_string;
+    private boolean isShowToast = true;
+    private boolean isGetObjString = false;
 
     public MainActivity() {
         this.mTW = null;
@@ -56,6 +61,23 @@ public class MainActivity extends Activity {
 		this.id_edittext_handler = (EditText) findViewById(R.id.id_edittext_handler);
 	    this.id_button_handler = (Button) findViewById (R.id.id_button_handler);
 		this.id_textview_log = (TextView) findViewById (R.id.id_textview_log);
+
+        checkbox_show_toast = (CheckBox) findViewById(R.id.checkbox_show_toast);
+        checkbox_get_obj_string = (CheckBox) findViewById(R.id.checkbox_get_obj_string);
+
+        this.checkbox_show_toast.setOnClickListener(new CheckBox.OnClickListener() {
+            public void onClick(View v) // клик на кнопку
+            {
+                isShowToast = checkbox_show_toast.isChecked();
+            }
+        });
+
+        this.checkbox_get_obj_string.setOnClickListener(new CheckBox.OnClickListener() {
+            public void onClick(View v) // клик на кнопку
+            {
+                isGetObjString = checkbox_get_obj_string.isChecked();
+            }
+        });
 
         this.id_button_sendcommand.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) // клик на кнопку
@@ -87,7 +109,7 @@ public class MainActivity extends Activity {
 			    if (isHandlerStarted) {
 				    // stop handler
 				    // stop and close TWUtil
-				    mTW2.write (xwhat, 255);
+				    //mTW2.write (xwhat, 255);
 				    mTW2.removeHandler ("TWUtilHandler");
 				    mTW2.stop ();
 				    mTW2.close ();
@@ -105,11 +127,16 @@ public class MainActivity extends Activity {
 							    try {
 								    if (msg.what == xwhat ) {
 										    Date date = new Date();
-										    SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
+										    SimpleDateFormat ft = new SimpleDateFormat ("HH:mm:ss");
 									        String sd = ft.format(date);
-											String str = String.format("%s:  Message: what: %d   arg1: %d  arg2: %d", sd, msg.what, msg.arg1, msg.arg2);
+											String str = String.format("%s -->:  what: %d   arg1: %d  arg2: %d", sd, msg.what, msg.arg1, msg.arg2);
 										    id_textview_log.setText ( str + "\n" + id_textview_log.getText ());
-									        Toast.makeText (MainActivity.this, String.format("what: %d, arg1: %d, arg2: %d", msg.what, msg.arg1, msg.arg2), Toast.LENGTH_LONG).show ();
+									        if ( isShowToast ) Toast.makeText (MainActivity.this, String.format("what: %d, arg1: %d, arg2: %d", msg.what, msg.arg1, msg.arg2), Toast.LENGTH_SHORT).show ();
+                                            if ( isGetObjString ) {
+                                                String objtext = (String) msg.obj;
+                                                id_textview_log.setText ( objtext + "\n" + id_textview_log.getText ());
+
+                                            }
 								    }
 							    } catch (Exception e) {
 							    }
