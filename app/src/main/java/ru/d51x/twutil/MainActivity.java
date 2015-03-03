@@ -133,8 +133,13 @@ public class MainActivity extends Activity {
 										    id_textview_log.setText ( str + "\n" + id_textview_log.getText ());
 									        if ( isShowToast ) Toast.makeText (MainActivity.this, String.format("what: %d, arg1: %d, arg2: %d", msg.what, msg.arg1, msg.arg2), Toast.LENGTH_SHORT).show ();
                                             if ( isGetObjString ) {
-                                                String objtext = (String) msg.obj;
-                                                id_textview_log.setText ( objtext + "\n" + id_textview_log.getText ());
+                                                try {
+                                                    String objtext = (String) msg.obj;
+
+                                                    id_textview_log.setText(objtext + "\n" + id_textview_log.getText());
+                                                } catch (Exception e) {
+                                                    
+                                                }
 
                                             }
 								    }
