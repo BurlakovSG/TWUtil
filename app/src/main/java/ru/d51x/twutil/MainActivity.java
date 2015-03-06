@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
     private TextView id_textView_Result;
 
 	private EditText id_edittext_handler;
+	private EditText id_edittext_modeid;
 	private Button id_button_handler;
 	private TextView id_textview_log;
 
@@ -59,6 +60,8 @@ public class MainActivity extends Activity {
         this.id_textView_Result = (TextView) findViewById(R.id.id_textView_Result);
 
 		this.id_edittext_handler = (EditText) findViewById(R.id.id_edittext_handler);
+		this.id_edittext_modeid = (EditText) findViewById(R.id.id_edittext_modeid);
+
 	    this.id_button_handler = (Button) findViewById (R.id.id_button_handler);
 		this.id_textview_log = (TextView) findViewById (R.id.id_textview_log);
 
@@ -118,11 +121,17 @@ public class MainActivity extends Activity {
 				    id_button_handler.setText ("Start Handler");
 			    } else {
 				    // open and start TWUtil
-                    mTW2 = new TWUtil ();
-                    short[] shorts;
-                    if ( id_edittext_handler.getText().toString() == "") {
 
-                        shorts = new short[]{(short) 260, (short) 262, (short) 263, (short) 266, (short) 274, (short) 513, (short) 514, (short) 515, (short) 769, (short) 770, (short) 1281, (short) -25088, (short) -25071, (short) -24816, (short) -24805, (short) -24804};
+				    if ( id_edittext_modeid.getText().toString().isEmpty () ) {
+					    mTW2 = new TWUtil ();
+				    } else {
+					    int i = Integer.parseInt(id_edittext_modeid.getText().toString());
+					    mTW2 = new TWUtil (i);
+				    }
+
+                    short[] shorts;
+                    if ( id_edittext_handler.getText().toString().isEmpty ()) {
+                        shorts = new short[]{(short) 260, (short) 262, (short) 263, (short) 266, (short) 274, (short) 282, (short) 513, (short) 514, (short) 515, (short) 769, (short) 770, (short) 1281, (short) -25088, (short) -25071, (short) -24816, (short) -24805, (short) -24804};
                     } else {
                         xwhat = Integer.parseInt(id_edittext_handler.getText().toString());
                         shorts = new short[]{(short) xwhat};
