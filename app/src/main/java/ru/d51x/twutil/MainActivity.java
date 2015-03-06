@@ -118,9 +118,17 @@ public class MainActivity extends Activity {
 				    id_button_handler.setText ("Start Handler");
 			    } else {
 				    // open and start TWUtil
-				    xwhat = Integer.parseInt (id_edittext_handler.getText ().toString ());
-				    mTW2 = new TWUtil ();
-				    if (mTW2.open (new short[]{(short) xwhat}) == 0) {
+                    mTW2 = new TWUtil ();
+                    short[] shorts;
+                    if ( id_edittext_handler.getText().toString() == "") {
+
+                        shorts = new short[]{(short) 260, (short) 262, (short) 263, (short) 266, (short) 274, (short) 513, (short) 514, (short) 515, (short) 769, (short) 770, (short) 1281, (short) -25088, (short) -25071, (short) -24816, (short) -24805, (short) -24804};
+                    } else {
+                        xwhat = Integer.parseInt(id_edittext_handler.getText().toString());
+                        shorts = new short[]{(short) xwhat};
+                    }
+
+				    if (mTW2.open ( shorts ) == 0) {
 					    mTW2.start ();
 					    mTW2.addHandler ("TWUtilHandler", new Handler () {
 						    public void handleMessage(Message msg) {
@@ -138,7 +146,7 @@ public class MainActivity extends Activity {
 
                                                     id_textview_log.setText(objtext + "\n" + id_textview_log.getText());
                                                 } catch (Exception e) {
-                                                    
+
                                                 }
 
                                             }
