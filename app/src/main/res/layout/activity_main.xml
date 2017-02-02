@@ -6,14 +6,148 @@
 
 	<LinearLayout
 		android:orientation="vertical"
-		android:layout_width="250.0dp"
+		android:layout_width="match_parent"
+		android:layout_height="fill_parent"
+		android:paddingLeft="20dp"
+		android:paddingRight="20dp"
+		android:paddingBottom="10dp"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:layout_marginTop="98dp">
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceSmall"
+					android:text="ModeId"
+					android:id="@+id/textView2"/>
+				<EditText
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ems="10"
+					android:id="@+id/id_edittext_modeid"/>
+			</LinearLayout>
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginLeft="10dp">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Handler"
+					android:id="@+id/textView"/>
+				<EditText
+					android:layout_width="74dp"
+					android:layout_height="wrap_content"
+					android:inputType="number"
+					android:ems="10"
+					android:id="@+id/id_edittext_handler"
+					android:text="515"/>
+			</LinearLayout>
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginLeft="10dp">
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="arg1"
+					android:id="@+id/textView"
+					android:gravity="center_vertical|center_horizontal" />
+				<EditText
+					android:layout_width="74dp"
+					android:layout_height="wrap_content"
+					android:inputType="number"
+					android:ems="10"
+					android:id="@+id/id_edittext_arg1"
+					android:selectAllOnFocus="false"
+					android:singleLine="false" />
+			</LinearLayout>
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_marginLeft="10dp">
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="arg2"
+					android:id="@+id/textView"
+					android:gravity="center_horizontal" />
+				<EditText
+					android:layout_width="74dp"
+					android:layout_height="wrap_content"
+					android:inputType="number"
+					android:ems="10"
+					android:id="@+id/id_edittext_arg2"/>
+			</LinearLayout>
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+
+				<Button
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Start Handler"
+					android:id="@+id/id_button_handler"/>
+
+				<CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Show Toasts"
+                    android:id="@+id/checkbox_show_toast"
+                    android:checked="true"
+					android:paddingRight="20dp" />
+
+				<CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='Show "obj"'
+                    android:id="@+id/checkbox_get_obj_string"
+					android:paddingRight="20dp" />
+
+				<Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_obj"
+                    android:layout_weight="1" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:id="@+id/scrollView">
+			<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:id="@+id/id_textview_log" android:background="#ffffffff"
+				android:textColor="#ff000000" android:focusableInTouchMode="true"/>
+		</ScrollView>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:baselineAligned="false"
 		android:showDividers="middle|beginning|end"
 		android:gravity="top|left"
-		android:layout_alignParentTop="true"
 		android:weightSum="1"
-		android:id="@+id/linearLayout">
+		android:id="@+id/linearLayout"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true">
 
 		<TextView android:text="@string/id_text_command" android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
@@ -66,122 +200,27 @@
 			    android:layout_alignTop="@+id/id_edit_arg2"
 			    android:layout_toRightOf="@+id/id_edit_arg2"
 			    android:layout_gravity="right"/>
-		</LinearLayout>
 
-		<TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textAppearance="?android:attr/textAppearanceMedium"
-	        android:text="@string/id_textView_Result_title"
-	        android:id="@+id/id_textView_Result_title"
-	        android:layout_below="@+id/id_button_sendcommand"
-	        android:layout_alignParentLeft="true"
-			/>
-
-		<TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:id="@+id/id_textView_Result"
-	        android:layout_below="@+id/id_textView_Result_title"
-	        android:layout_alignParentLeft="true"
-	        android:layout_marginTop="10dp"
-	        android:layout_marginBottom="20dp"
-	        android:layout_marginLeft="20dp"/>
-
-	</LinearLayout>
-
-	<LinearLayout
-		android:orientation="vertical"
-		android:layout_width="match_parent"
-		android:layout_height="fill_parent"
-		android:layout_alignParentTop="true"
-		android:layout_alignParentRight="true"
-		android:layout_toRightOf="@+id/linearLayout"
-		android:paddingLeft="20dp"
-		android:paddingRight="20dp"
-		android:paddingBottom="10dp">
-
-		<LinearLayout
-			android:orientation="horizontal"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content">
-			<LinearLayout
-				android:orientation="vertical"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content">
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textAppearance="?android:attr/textAppearanceSmall"
-					android:text="ModeId"
-					android:id="@+id/textView2"/>
-				<EditText
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:ems="10"
-					android:id="@+id/id_edittext_modeid"/>
-			</LinearLayout>
-			<LinearLayout
-				android:orientation="vertical"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:layout_marginLeft="10dp">
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Handler"
-					android:id="@+id/textView"/>
-				<EditText
-					android:layout_width="74dp"
-					android:layout_height="wrap_content"
-					android:inputType="number"
-					android:ems="10"
-					android:id="@+id/id_edittext_handler"
-					android:text="515"/>
-			</LinearLayout>
-			<LinearLayout
-				android:orientation="horizontal"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content">
-
-				<Button
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:text="Start Handler"
-					android:id="@+id/id_button_handler"/>
-
-				<CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Show Toasts"
-                    android:id="@+id/checkbox_show_toast"
-                    android:checked="true"/>
-
-				<CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Obj String"
-                    android:id="@+id/checkbox_get_obj_string"/>
-
-				<Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/sp_obj"
-                    android:layout_weight="1" />
-
-			</LinearLayout>
-
-		</LinearLayout>
-
-		<ScrollView
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:id="@+id/scrollView">
 			<TextView
-				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"
-				android:id="@+id/id_textview_log" android:background="#ffffffff"
-				android:textColor="#ff000000" android:focusableInTouchMode="true"/>
-		</ScrollView>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/id_textView_Result_title"
+                android:id="@+id/id_textView_Result_title"
+                android:layout_below="@+id/id_button_sendcommand"
+                android:layout_alignParentLeft="true" />
+
+			<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/id_textView_Result"
+                android:layout_below="@+id/id_textView_Result_title"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+				android:layout_weight="1" />
+		</LinearLayout>
 
 	</LinearLayout>
 
