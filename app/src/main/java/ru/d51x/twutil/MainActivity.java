@@ -32,6 +32,8 @@ public class  MainActivity extends Activity {
 
 	private EditText id_edittext_handler;
 	private EditText id_edittext_modeid;
+	private EditText id_edittext_arg1;
+	private EditText id_edittext_arg2;
 	private Button id_button_handler;
 	private TextView id_textview_log;
 
@@ -75,6 +77,9 @@ public class  MainActivity extends Activity {
 
 		this.id_edittext_handler = (EditText) findViewById(R.id.id_edittext_handler);
 		this.id_edittext_modeid = (EditText) findViewById(R.id.id_edittext_modeid);
+
+		this.id_edittext_arg1 = (EditText) findViewById(R.id.id_edittext_arg1);
+		this.id_edittext_arg1 = (EditText) findViewById(R.id.id_edittext_arg1);
 
 	    this.id_button_handler = (Button) findViewById (R.id.id_button_handler);
 		this.id_textview_log = (TextView) findViewById (R.id.id_textview_log);
@@ -168,14 +173,29 @@ public class  MainActivity extends Activity {
 						    public void handleMessage(Message msg) {
 							    try {
 								    if (msg.what == xwhat ) {
-										    Date date = new Date();
-										    SimpleDateFormat ft = new SimpleDateFormat ("HH:mm:ss");
-									        String sd = ft.format(date);
+										Boolean arg_filtr = true;
+
+										if (!id_edittext_arg1.getText().toString().isEmpty () &&
+												msg.arg1 != Integer.parseInt(id_edittext_arg1.getText().toString())) {
+											arg_filtr = false;
+										}
+
+
+										if (!id_edittext_arg2.getText().toString().isEmpty () &&
+												msg.arg2 != Integer.parseInt(id_edittext_arg2.getText().toString())) {
+											arg_filtr = false;
+										}
+
+										if (arg_filtr) {
+											Date date = new Date();
+											SimpleDateFormat ft = new SimpleDateFormat("HH:mm:ss");
+											String sd = ft.format(date);
 											String str = String.format("%s -->:  what: %d   arg1: %d  arg2: %d", sd, msg.what, msg.arg1, msg.arg2);
-										    id_textview_log.setText ( str + "\n" + id_textview_log.getText ());
-									        if ( isShowToast ) Toast.makeText (MainActivity.this, String.format("what: %d, arg1: %d, arg2: %d", msg.what, msg.arg1, msg.arg2), Toast.LENGTH_SHORT).show ();
-                                            if ( isGetObjString ) {
-                                                try {
+											id_textview_log.setText(str + "\n" + id_textview_log.getText());
+											if (isShowToast)
+												Toast.makeText(MainActivity.this, String.format("what: %d, arg1: %d, arg2: %d", msg.what, msg.arg1, msg.arg2), Toast.LENGTH_SHORT).show();
+											if (isGetObjString) {
+												try {
 													switch (sp_obj.getSelectedItemPosition()) {
 														case 0:
 															String objtext = (String) msg.obj;
@@ -187,11 +207,12 @@ public class  MainActivity extends Activity {
 															break;
 													}
 
-                                                } catch (Exception e) {
+												} catch (Exception e) {
 
-                                                }
+												}
 
-                                            }
+											}
+										}
 								    }
 							    } catch (Exception e) {
 							    }
