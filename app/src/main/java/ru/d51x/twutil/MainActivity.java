@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 
 import android.view.View;
 
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
@@ -17,7 +19,7 @@ import android.widget.CheckBox;
 import android.tw.john.TWUtil;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class  MainActivity extends Activity {
 
 	private int xwhat = -1;
     private static Handler mHandler;
@@ -37,8 +39,20 @@ public class MainActivity extends Activity {
 	public boolean isHandlerStarted;
     private CheckBox checkbox_show_toast;
     private CheckBox checkbox_get_obj_string;
+	private Spinner sp_obj;
     private boolean isShowToast = true;
     private boolean isGetObjString = false;
+
+	final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
+	public static String bytesToHex(byte[] bytes) {
+		char[] hexChars = new char[bytes.length * 2];
+		for ( int j = 0; j < bytes.length; j++ ) {
+			int v = bytes[j] & 0xFF;
+			hexChars[j * 2] = hexArray[v >>> 4];
+			hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+		}
+		return new String(hexChars);
+	}
 
     public MainActivity() {
         this.mTW = null;
@@ -67,6 +81,16 @@ public class MainActivity extends Activity {
 
         checkbox_show_toast = (CheckBox) findViewById(R.id.checkbox_show_toast);
         checkbox_get_obj_string = (CheckBox) findViewById(R.id.checkbox_get_obj_string);
+		sp_obj = (Spinner) findViewById(R.id.sp_obj);
+
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+				R.array.obj, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		sp_obj.setAdapter(adapter);
+		sp_obj.setSelection(0);
+		sp_obj.setEnabled(checkbox_get_obj_string.isChecked());
+//		sp_obj.setPrompt(name);
 
         this.checkbox_show_toast.setOnClickListener(new CheckBox.OnClickListener() {
             public void onClick(View v) // клик на кнопку
@@ -79,6 +103,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) // клик на кнопку
             {
                 isGetObjString = checkbox_get_obj_string.isChecked();
+				sp_obj.setEnabled(checkbox_get_obj_string.isChecked());
             }
         });
 
@@ -151,9 +176,17 @@ public class MainActivity extends Activity {
 									        if ( isShowToast ) Toast.makeText (MainActivity.this, String.format("what: %d, arg1: %d, arg2: %d", msg.what, msg.arg1, msg.arg2), Toast.LENGTH_SHORT).show ();
                                             if ( isGetObjString ) {
                                                 try {
-                                                    String objtext = (String) msg.obj;
+													switch (sp_obj.getSelectedItemPosition()) {
+														case 0:
+															String objtext = (String) msg.obj;
+															id_textview_log.setText(objtext + "\n" + id_textview_log.getText());
+															break;
+														case 1:
+															String objhex = (String) bytesToHex((byte[]) msg.obj);
+															id_textview_log.setText(objhex + "\n" + id_textview_log.getText());
+															break;
+													}
 
-                                                    id_textview_log.setText(objtext + "\n" + id_textview_log.getText());
                                                 } catch (Exception e) {
 
                                                 }

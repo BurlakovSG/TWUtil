@@ -149,20 +149,27 @@
 					android:text="Start Handler"
 					android:id="@+id/id_button_handler"/>
 
-	            <CheckBox
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:text="Show Toasts"
-	                android:id="@+id/checkbox_show_toast"
-	                android:checked="true"/>
+				<CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Show Toasts"
+                    android:id="@+id/checkbox_show_toast"
+                    android:checked="true"/>
 
-	            <CheckBox
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:text="Obj String"
-	                android:id="@+id/checkbox_get_obj_string"/>
+				<CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Obj String"
+                    android:id="@+id/checkbox_get_obj_string"/>
 
-	        </LinearLayout>
+				<Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_obj"
+                    android:layout_weight="1" />
+
+			</LinearLayout>
+
 		</LinearLayout>
 
 		<ScrollView
